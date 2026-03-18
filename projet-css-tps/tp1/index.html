@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abdelali TAHIRI — Portfolio Cybersécurité</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #c8ff00;
+      --accent2: #ff6b35;
+      --text: #f0f0f0;
+      --muted: #888;
+      --font-display: 'DM Serif Display', serif;
+      --font-body: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--accent);
+      color: #000;
+      padding: .5rem 1rem;
+      font-weight: 700;
+      z-index: 9999;
+      border-radius: 0 0 6px 6px;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── HEADER & NAV ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,13,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    nav a:hover, nav a:focus { color: var(--accent); outline: none; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 4rem;
+    }
+
+    .hero-text .tag {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: .75rem 1.75rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all .2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      border: 2px solid var(--accent);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Photo */
+    .hero-photo {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .photo-wrapper {
+      position: relative;
+      width: 340px;
+      height: 420px;
+    }
+
+    .photo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      transform: rotate(3deg);
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      filter: grayscale(20%);
+    }
+
+    .photo-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--accent2);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      padding: .5rem .8rem;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 2rem;
+    }
+
+    /* ── À PROPOS ── */
+    #a-propos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+
+    .stat-card .num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-card span {
+      font-size: .8rem;
+      color: var(--muted);
+      display: block;
+      margin-top: .25rem;
+    }
+
+    /* ── COMPÉTENCES ── */
+    #competences { border-top: 1px solid var(--border); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .skill-category h3 {
+      font-size: .9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-list { list-style: none; }
+
+    .skill-list li {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .4rem 0;
+      font-size: .9rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-list li:last-child { border-bottom: none; }
+
+    .skill-list li::before {
+      content: '▸';
+      color: var(--accent);
+      font-size: .7rem;
+    }
+
+    /* ── FORMATIONS / EXPÉRIENCES ── */
+    #formations { border-top: 1px solid var(--border); }
+
+    .timeline-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+
+    .timeline-table thead tr {
+      background: var(--surface);
+    }
+
+    .timeline-table th {
+      text-align: left;
+      padding: 1rem 1.25rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .timeline-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+
+    .timeline-table tbody tr:hover td { background: var(--surface); }
+
+    .timeline-table .year {
+      font-family: var(--font-mono);
+      color: var(--accent2);
+      font-size: .8rem;
+      white-space: nowrap;
+    }
+
+    .timeline-table .title-cell {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .badge-edu { background: rgba(200,255,0,.1); color: var(--accent); }
+    .badge-exp { background: rgba(255,107,53,.1); color: var(--accent2); }
+
+    /* ── RÉSEAUX SOCIAUX ── */
+    #contact { border-top: 1px solid var(--border); text-align: center; }
+
+    .social-grid {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .85rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: .85rem;
+      font-weight: 600;
+      transition: all .2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .social-icon {
+      font-size: 1.1rem;
+    }
+
+    /* ── PROJECTS SECTION (ajoutée pour vos repos GitHub) ── */
+    #projets {
+      border-top: 1px solid var(--border);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      transition: all .2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .project-title {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .project-tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background: rgba(200,255,0,0.1);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      #hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-photo { display: none; }
+      #a-propos { grid-template-columns: 1fr; gap: 2rem; }
+      nav ul { gap: 1rem; }
+      .photo-wrapper { width: 260px; height: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link pour accessibilité -->
+  <a class="skip-link" href="#main-content">Aller au contenu principal</a>
+
+  <!-- ══ HEADER ══ -->
+  <header>
+    <a href="#hero" class="logo">Abdelali155</a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#formations">Formations</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══ MAIN ══ -->
+  <main id="main-content">
+
+    <!-- ── HERO ── -->
+    <section id="hero" aria-label="Présentation principale">
+      <div class="hero-text">
+        <span class="tag">// Cybersecurity Student</span>
+        <h1>Abdelali <em>TAHIRI</em><br>Étudiant en<br>Cybersécurité</h1>
+        <p>Étudiant en 1ère année de cybersécurité à l'ENSET Mohammedia, passionné par la protection des systèmes d'information et l'analyse de vulnérabilités. En constante évolution dans le monde de la sécurité informatique.</p>
+        <div class="cta-group">
+          <a href="#contact" class="btn btn-primary">Me contacter</a>
+          <a href="#formations" class="btn btn-outline">Mon parcours</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <div class="photo-wrapper">
+          <!-- Remplacez par votre vraie photo -->
+          <img
+            src="https://placehold.co/340x420/161616/c8ff00?text=Abdelali+TAHIRI"
+            alt="Portrait professionnel d'Abdelali TAHIRI, étudiant en cybersécurité"
+            width="340"
+            height="420"
+          />
+          <div class="photo-badge">📍 Mohammedia, Morocco</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── À PROPOS ── -->
+    <section id="a-propos" aria-labelledby="title-about">
+      <div>
+        <p class="section-label">01 — À propos</p>
+        <h2 id="title-about">Qui suis-je ?</h2>
+        <div class="about-content">
+          <p>Je suis Abdelali TAHIRI (Abdelali155), étudiant en 1ère année de cybersécurité à l'ENSET Mohammedia, passionné par la protection des infrastructures numériques et l'analyse des menaces informatiques.</p>
+          <p>Actuellement à l'ENSET, je développe mes compétences en sécurité réseau, cryptographie, et tests d'intrusion. Chaque défi est pour moi l'occasion d'apprendre et de renforcer mes connaissances en sécurité.</p>
+          <p>En dehors des études, je m'intéresse à l'éthique hacking, aux CTF (Capture The Flag), et aux dernières vulnérabilités qui façonnent le paysage de la cybersécurité. Je partage régulièrement mes exercices Python et C sur GitHub.</p>
+
+          <div class="about-stats" role="list" aria-label="Statistiques clés">
+            <article class="stat-card" role="listitem">
+              <div class="num">1+</div>
+              <span>Année en cybersécurité</span>
+            </article>
+            <article class="stat-card" role="listitem">
+              <div class="num">5+</div>
+              <span>Projets GitHub</span>
+            </article>
+            <article class="stat-card" role="listitem">
+              <div class="num">3+</div>
+              <span>Outils maîtrisés</span>
+            </article>
+            <article class="stat-card" role="listitem">
+              <div class="num">∞</div>
+              <span>Passion pour la sécurité</span>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <!-- Petite photo secondaire côté droit -->
+      <figure>
+        <img
+          src="https://placehold.co/460x520/161616/ff6b35?text=Cybersecurity+Setup"
+          alt="Mon environnement de travail : bureau avec setup cybersécurité"
+          width="460"
+          height="520"
+          style="width:100%;height:auto;border-radius:10px;border:1px solid var(--border);"
+        />
+        <figcaption style="font-size:.75rem;color:var(--muted);margin-top:.5rem;font-family:var(--font-mono);">Mon setup cybersécurité</figcaption>
+      </figure>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── COMPÉTENCES ── -->
+    <section id="competences" aria-labelledby="title-skills">
+      <p class="section-label">02 — Compétences</p>
+      <h2 id="title-skills">Ce que je maîtrise</h2>
+
+      <div class="skills-grid">
+        <article class="skill-category">
+          <h3>🌐 Réseaux</h3>
+          <ul class="skill-list" aria-label="Compétences réseaux">
+            <li>TCP/IP & Protocoles</li>
+            <li>Configuration routeurs</li>
+            <li>VLAN & Subnetting</li>
+            <li>Analyse de trafic (Wireshark)</li>
+            <li>Firewalls & ACL</li>
+          </ul>
+        </article>
+
+        <article class="skill-category">
+          <h3>⚙️ Sécurité Système</h3>
+          <ul class="skill-list" aria-label="Compétences sécurité">
+            <li>Linux/Windows Hardening</li>
+            <li>Gestion des droits</li>
+            <li>Authentification</li>
+            <li>Analyse de logs</li>
+            <li>Détection d'intrusions</li>
+          </ul>
+        </article>
+
+        <article class="skill-category">
+          <h3>🛠️ Outils Cyber</h3>
+          <ul class="skill-list" aria-label="Outils de cybersécurité">
+            <li>Wireshark & Nmap</li>
+            <li>Python pour la sécurité</li>
+            <li>C / Programmation système</li>
+            <li>Git & GitHub</li>
+            <li>Kali Linux</li>
+          </ul>
+        </article>
+
+        <article class="skill-category">
+          <h3>🧠 Soft skills</h3>
+          <ol class="skill-list" aria-label="Compétences transversales">
+            <li>Rigueur & analyse</li>
+            <li>Curiosité technique</li>
+            <li>Résolution de problèmes</li>
+            <li>Veille sécurité</li>
+            <li>Éthique professionnelle</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── FORMATIONS ── -->
+    <section id="formations" aria-labelledby="title-formations">
+      <p class="section-label">03 — Parcours</p>
+      <h2 id="title-formations">Formation</h2>
+
+      <div style="overflow-x:auto;">
+        <table class="timeline-table" aria-label="Tableau des formations">
+          <caption style="caption-side:top;text-align:left;color:var(--muted);font-size:.8rem;margin-bottom:1rem;font-family:var(--font-mono);">Mon parcours académique</caption>
+          <thead>
+            <tr>
+              <th scope="col">Période</th>
+              <th scope="col">Diplôme</th>
+              <th scope="col">Établissement</th>
+              <th scope="col">Type</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="year">2024 — Présent</td>
+              <td class="title-cell">1ère année Cybersécurité</td>
+              <td>ENSET Mohammedia</td>
+              <td><span class="badge badge-edu">Formation</span></td>
+              <td>Sécurité réseau, cryptographie, tests d'intrusion, systèmes d'exploitation</td>
+            </tr>
+            <tr>
+              <td class="year">2023 — 2024</td>
+              <td class="title-cell">Baccalauréat Sciences Maths</td>
+              <td>Lycée [Votre Lycée]</td>
+              <td><span class="badge badge-edu">Formation</span></td>
+              <td>Mention — Option sciences physiques</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── PROJETS GITHUB ── -->
+    <section id="projets" aria-labelledby="title-projects">
+      <p class="section-label">04 — Projets GitHub</p>
+      <h2 id="title-projects">Mes dépôts publics</h2>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <h3 class="project-title">dijkstra-pathfinding</h3>
+          <p class="project-desc">Implémentation de l'algorithme de Dijkstra pour la recherche de chemin optimal.</p>
+          <span class="project-tag">Public</span>
+        </article>
+
+        <article class="project-card">
+          <h3 class="project-title">programming-tds</h3>
+          <p class="project-desc">All my Python and C TD exercises with PDFs and solutions.</p>
+          <span class="project-tag">Jupyter Notebook</span>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ── CONTACT / RÉSEAUX ── -->
+    <section id="contact" aria-labelledby="title-contact">
+      <p class="section-label">05 — Contact</p>
+      <h2 id="title-contact">Me retrouver en ligne</h2>
+      <p style="color:var(--muted);max-width:520px;margin:0 auto 2rem;">Disponible pour des opportunités de stage en cybersécurité, des projets ou simplement pour échanger sur la sécurité informatique.</p>
+
+      <nav class="social-grid" aria-label="Liens vers les réseaux sociaux">
+        <a
+          class="social-link"
+          href="https://github.com/Abdelali155"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Profil GitHub d'Abdelali TAHIRI (nouvelle fenêtre)"
+        >
+          <span class="social-icon" aria-hidden="true">🐙</span>
+          GitHub
+        </a>
+
+        <a
+          class="social-link"
+          href="https://linkedin.com/in/abdeli-tahiri-bb7004391"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Profil LinkedIn d'Abdelali TAHIRI (nouvelle fenêtre)"
+        >
+          <span class="social-icon" aria-hidden="true">💼</span>
+          LinkedIn
+        </a>
+
+        <a
+          class="social-link"
+          href="mailto:abdelaibendriss2005@gmail.com"
+          aria-label="Envoyer un email à Abdelali TAHIRI"
+        >
+          <span class="social-icon" aria-hidden="true">✉️</span>
+          Email
+        </a>
+
+        <a
+          class="social-link"
+          href="https://c3-abdelali-tahiri.enset.ma/tp1"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Portfolio sur la plateforme ENSET"
+        >
+          <span class="social-icon" aria-hidden="true">🌐</span>
+          ENSET Portfolio
+        </a>
+      </nav>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>
+      &copy; 2024 <a href="#hero">Abdelali TAHIRI</a> (Abdelali155) — Développé avec ❤️ en HTML5 &amp; CSS3 pur •
+      <a href="https://c3-abdelali-tahiri.enset.ma/tp1" target="_blank" rel="noopener noreferrer">Voir sur ENSET</a>
+    </p>
+  </footer>
+
+</body>
+</html>

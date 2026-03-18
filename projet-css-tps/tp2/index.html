@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription — Abdelali TAHIRI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f2ed;
+      --surface: #fff;
+      --border: #d9d4cc;
+      --border-focus: #1a1a1a;
+      --accent: #1a1a1a;
+      --accent2: #c8401a;
+      --text: #1a1a1a;
+      --muted: #888;
+      --error: #c8401a;
+      --success: #2d7a2d;
+      --font: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page-wrap {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--accent);
+      color: #fff;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .sidebar-logo {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: #aaa;
+      letter-spacing: .2em;
+    }
+
+    .sidebar-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-title span { color: #c8ff00; }
+
+    .sidebar p {
+      font-size: .9rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .steps li {
+      font-size: .8rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--font-mono);
+    }
+
+    .steps li.active { color: #c8ff00; }
+    .steps li::before { content: '—'; }
+
+    /* ── FORM AREA ── */
+    .form-area {
+      padding: 3rem 4rem;
+      overflow-y: auto;
+    }
+
+    .form-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .form-header p { color: var(--muted); margin-top: .5rem; font-size: .9rem; }
+
+    /* ── FIELDSET ── */
+    fieldset {
+      border: none;
+      margin-bottom: 2.5rem;
+    }
+
+    legend {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      font-family: var(--font-mono);
+      padding: 0;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    legend::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── FORM ROW ── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+      letter-spacing: .04em;
+    }
+
+    label .req {
+      color: var(--error);
+      margin-left: .2rem;
+    }
+
+    /* ── INPUTS ── */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="password"],
+    input[type="file"],
+    select,
+    textarea,
+    input[type="search"] {
+      width: 100%;
+      padding: .75rem 1rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: .9rem;
+      color: var(--text);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      appearance: none;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(26,26,26,.08);
+    }
+
+    input:invalid:not(:placeholder-shown) {
+      border-color: var(--error);
+    }
+
+    input:valid:not(:placeholder-shown) {
+      border-color: var(--success);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a1a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+
+    /* Char counter */
+    .char-hint {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: right;
+      margin-top: .25rem;
+      font-family: var(--font-mono);
+    }
+
+    /* File input */
+    input[type="file"] {
+      cursor: pointer;
+      padding: .6rem;
+    }
+
+    /* ── RADIO & CHECKBOX ── */
+    .radio-group, .check-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: .25rem;
+    }
+
+    .radio-label, .check-label {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      cursor: pointer;
+      padding: .5rem .9rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: .85rem;
+      font-weight: 400;
+      transition: all .2s;
+      user-select: none;
+    }
+
+    .radio-label:has(input:checked),
+    .check-label:has(input:checked) {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .radio-label input,
+    .check-label input {
+      width: auto;
+      accent-color: var(--accent);
+    }
+
+    /* CGU */
+    .cgu-label {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      cursor: pointer;
+      font-size: .85rem;
+      line-height: 1.5;
+      padding: 1rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .cgu-label input {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: .1rem;
+      accent-color: var(--accent);
+    }
+
+    .cgu-label a {
+      color: var(--accent2);
+      font-weight: 700;
+    }
+
+    /* ── PASSWORD STRENGTH ── */
+    .pw-hints {
+      margin-top: .5rem;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .pw-hints li {
+      font-size: .72rem;
+      font-family: var(--font-mono);
+      padding: .2rem .5rem;
+      border-radius: 4px;
+      background: #f0ede8;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      transition: all .2s;
+    }
+
+    .pw-hints li.ok {
+      background: rgba(45,122,45,.1);
+      color: var(--success);
+      border-color: var(--success);
+    }
+
+    /* ── SUBMIT ── */
+    .form-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: .9rem 2.5rem;
+      font-family: var(--font);
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .btn-submit:hover { background: var(--accent2); }
+
+    .login-link {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .login-link a {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* ── SUCCESS MESSAGE ── */
+    #success-msg {
+      display: none;
+      background: rgba(45,122,45,.1);
+      border: 1.5px solid var(--success);
+      border-radius: 8px;
+      padding: 1.25rem;
+      color: var(--success);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .form-area { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" aria-label="Information sur le formulaire">
+    <div class="sidebar-logo">Abdelali155 / inscription</div>
+    <div>
+      <h2 class="sidebar-title">Créez votre<br><span>compte</span></h2>
+      <p>Rejoignez la communauté et accédez à toutes les ressources pédagogiques.</p>
+      <ul class="steps" aria-label="Étapes du formulaire">
+        <li class="active">Informations personnelles</li>
+        <li>Sécurité</li>
+        <li>Préférences</li>
+        <li>Confirmation</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ── FORM ── -->
+  <div class="form-area">
+    <div class="form-header">
+      <h1>Inscription</h1>
+      <p>Tous les champs marqués d'un <span aria-hidden="true" style="color:var(--error)">*</span> sont obligatoires.</p>
+    </div>
+
+    <div id="success-msg" role="alert" aria-live="polite">
+      ✅ Inscription réussie ! Bienvenue dans la communauté.
+    </div>
+
+    <form id="register-form" novalidate aria-label="Formulaire d'inscription complet">
+
+      <!-- ═══ 1. INFORMATIONS PERSONNELLES ═══ -->
+      <fieldset>
+        <legend>Informations personnelles</legend>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="prenom">Prénom <span class="req" aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              placeholder="Votre prénom"
+              autocomplete="given-name"
+              required
+              minlength="2"
+              aria-required="true"
+              aria-describedby="prenom-error"
+            />
+          </div>
+          <div class="form-group">
+            <label for="nom">Nom <span class="req" aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              placeholder="Votre nom de famille"
+              autocomplete="family-name"
+              required
+              minlength="2"
+              aria-required="true"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Adresse email <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="vous@example.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-describedby="email-hint"
+          />
+          <p id="email-hint" class="char-hint">Format attendu : vous@domaine.com</p>
+        </div>
+
+        <div class="form-group">
+          <label for="telephone">Téléphone <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="tel"
+            id="telephone"
+            name="telephone"
+            placeholder="0612345678"
+            autocomplete="tel"
+            required
+            pattern="^(0[6-7][0-9]{8}|(\+212)[6-7][0-9]{8})$"
+            aria-required="true"
+            aria-describedby="tel-hint"
+          />
+          <p id="tel-hint" class="char-hint">Format marocain : 06XXXXXXXX ou 07XXXXXXXX</p>
+        </div>
+
+        <div class="form-group">
+          <label for="naissance">Date de naissance <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="date"
+            id="naissance"
+            name="naissance"
+            required
+            aria-required="true"
+            aria-describedby="age-hint"
+          />
+          <p id="age-hint" class="char-hint">Vous devez avoir au moins 18 ans</p>
+        </div>
+
+        <!-- Genre (radio) -->
+        <div class="form-group">
+          <fieldset style="border:none;padding:0;">
+            <legend style="font-size:.8rem;font-weight:700;letter-spacing:.04em;margin-bottom:.5rem;color:var(--text);text-transform:none;">Genre <span class="req" aria-hidden="true">*</span></legend>
+            <div class="radio-group" role="radiogroup">
+              <label class="radio-label">
+                <input type="radio" name="genre" value="homme" required /> Homme
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="genre" value="femme" /> Femme
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="genre" value="autre" /> Autre
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="genre" value="non-specifie" /> Non spécifié
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Pays -->
+        <div class="form-group">
+          <label for="pays">Pays <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="search"
+            id="pays"
+            name="pays"
+            placeholder="Rechercher votre pays..."
+            list="pays-list"
+            required
+            autocomplete="country-name"
+            aria-required="true"
+          />
+          <datalist id="pays-list">
+            <option value="Maroc" />
+            <option value="France" />
+            <option value="Belgique" />
+            <option value="Suisse" />
+            <option value="Canada" />
+            <option value="Algérie" />
+            <option value="Tunisie" />
+            <option value="Sénégal" />
+            <option value="Côte d'Ivoire" />
+            <option value="Autre" />
+          </datalist>
+        </div>
+      </fieldset>
+
+      <!-- ═══ 2. SÉCURITÉ ═══ -->
+      <fieldset>
+        <legend>Sécurité</legend>
+
+        <div class="form-group">
+          <label for="password">Mot de passe <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Votre mot de passe"
+            autocomplete="new-password"
+            required
+            minlength="8"
+            pattern="^(?=.*[A-Z])(?=.*[0-9]).{8,}$"
+            aria-required="true"
+            aria-describedby="pw-hints"
+          />
+          <ul class="pw-hints" id="pw-hints" aria-label="Conditions du mot de passe">
+            <li id="hint-len">8 caractères minimum</li>
+            <li id="hint-upper">1 majuscule</li>
+            <li id="hint-num">1 chiffre</li>
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label for="password2">Confirmer le mot de passe <span class="req" aria-hidden="true">*</span></label>
+          <input
+            type="password"
+            id="password2"
+            name="password2"
+            placeholder="Répétez votre mot de passe"
+            autocomplete="new-password"
+            required
+            aria-required="true"
+            aria-describedby="pw2-hint"
+          />
+          <p id="pw2-hint" class="char-hint" aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <!-- ═══ 3. PRÉFÉRENCES ═══ -->
+      <fieldset>
+        <legend>Préférences</legend>
+
+        <!-- Centres d'intérêt (checkboxes) -->
+        <div class="form-group">
+          <fieldset style="border:none;padding:0;">
+            <legend style="font-size:.8rem;font-weight:700;letter-spacing:.04em;margin-bottom:.5rem;color:var(--text);text-transform:none;">Centres d'intérêt</legend>
+            <div class="check-group">
+              <label class="check-label"><input type="checkbox" name="interets" value="dev-web" /> Développement Web</label>
+              <label class="check-label"><input type="checkbox" name="interets" value="design" /> Design UI/UX</label>
+              <label class="check-label"><input type="checkbox" name="interets" value="ia" /> Intelligence Artificielle</label>
+              <label class="check-label"><input type="checkbox" name="interets" value="mobile" /> Mobile</label>
+              <label class="check-label"><input type="checkbox" name="interets" value="securite" checked /> Cybersécurité</label>
+              <label class="check-label"><input type="checkbox" name="interets" value="data" /> Data Science</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Biographie -->
+        <div class="form-group">
+          <label for="bio">Biographie</label>
+          <textarea
+            id="bio"
+            name="bio"
+            placeholder="Parlez-nous de vous en quelques mots..."
+            maxlength="500"
+            rows="4"
+            aria-describedby="bio-count"
+          ></textarea>
+          <p class="char-hint" id="bio-count" aria-live="polite"><span id="bio-len">0</span> / 500 caractères</p>
+        </div>
+
+        <!-- Photo de profil -->
+        <div class="form-group">
+          <label for="photo">Photo de profil</label>
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/jpeg,image/png,image/webp"
+            aria-describedby="photo-hint"
+          />
+          <p id="photo-hint" class="char-hint">Formats acceptés : JPG, PNG, WebP — Max 2 Mo</p>
+        </div>
+      </fieldset>
+
+      <!-- ═══ 4. CGU ═══ -->
+      <fieldset>
+        <legend>Confirmation</legend>
+
+        <label class="cgu-label">
+          <input
+            type="checkbox"
+            id="cgu"
+            name="cgu"
+            required
+            aria-required="true"
+          />
+          <span>
+            J'accepte les <a href="#" target="_blank" rel="noopener noreferrer">conditions générales d'utilisation</a>
+            et la <a href="#" target="_blank" rel="noopener noreferrer">politique de confidentialité</a>.
+            Je comprends que mes données seront traitées conformément au RGPD.
+            <span class="req" aria-hidden="true">*</span>
+          </span>
+        </label>
+      </fieldset>
+
+      <!-- ═══ SUBMIT ═══ -->
+      <div class="form-footer">
+        <p class="login-link">Déjà inscrit ? <a href="#">Se connecter</a></p>
+        <button type="submit" class="btn-submit" aria-label="Soumettre le formulaire d'inscription">
+          Créer mon compte →
+        </button>
+      </div>
+
+    </form>
+    
+    <!-- Footer avec lien vers le TP -->
+    <div style="margin-top: 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: 1.5rem;">
+      <p>© 2024 Abdelali TAHIRI · <a href="https://c3-li-tahiri.enset.ma" style="color: var(--accent2);">c3-li-tahiri.enset.ma/tp2</a> · TP2 - Formulaire d'inscription</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Password hints live feedback ──
+  const pw = document.getElementById('password');
+  const pw2 = document.getElementById('password2');
+  const hintLen = document.getElementById('hint-len');
+  const hintUpper = document.getElementById('hint-upper');
+  const hintNum = document.getElementById('hint-num');
+  const pw2Hint = document.getElementById('pw2-hint');
+
+  pw.addEventListener('input', () => {
+    const v = pw.value;
+    hintLen.classList.toggle('ok', v.length >= 8);
+    hintUpper.classList.toggle('ok', /[A-Z]/.test(v));
+    hintNum.classList.toggle('ok', /[0-9]/.test(v));
+  });
+
+  pw2.addEventListener('input', () => {
+    if (!pw2.value) { pw2Hint.textContent = ''; return; }
+    if (pw2.value === pw.value) {
+      pw2Hint.textContent = '✅ Les mots de passe correspondent';
+      pw2Hint.style.color = 'var(--success)';
+    } else {
+      pw2Hint.textContent = '❌ Les mots de passe ne correspondent pas';
+      pw2Hint.style.color = 'var(--error)';
+    }
+  });
+
+  // ── Biographie character counter ──
+  const bio = document.getElementById('bio');
+  const bioLen = document.getElementById('bio-len');
+  bio.addEventListener('input', () => {
+    bioLen.textContent = bio.value.length;
+  });
+
+  // ── Âge minimum 18 ans ──
+  const dateInput = document.getElementById('naissance');
+  dateInput.addEventListener('change', () => {
+    const birth = new Date(dateInput.value);
+    const today = new Date();
+    const age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    const realAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate()) ? age - 1 : age;
+    if (realAge < 18) {
+      dateInput.setCustomValidity('Vous devez avoir au moins 18 ans pour vous inscrire.');
+    } else {
+      dateInput.setCustomValidity('');
+    }
+  });
+
+  // ── Date max = aujourd'hui - 18 ans ──
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 18);
+  dateInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
+
+  // ── Form submit ──
+  const form = document.getElementById('register-form');
+  const successMsg = document.getElementById('success-msg');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Vérification confirmation MDP
+    if (pw.value !== pw2.value) {
+      pw2.setCustomValidity('Les mots de passe ne correspondent pas.');
+      pw2.reportValidity();
+      return;
+    } else {
+      pw2.setCustomValidity('');
+    }
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    successMsg.style.display = 'block';
+    form.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdelali TAHIRI - TP CSS</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #c8ff00, #ff6b35, #c8ff00);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient 3s linear infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .subtitle {
+      color: #888;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .subtitle a {
+      color: #c8ff00;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .subtitle a:hover {
+      text-decoration: underline;
+    }
+
+    .info-card {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2rem 0 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #888;
+    }
+
+    .info-icon {
+      color: #c8ff00;
+      font-size: 1.2rem;
+    }
+
+    .info-text {
+      font-size: 0.95rem;
+    }
+
+    .info-text strong {
+      color: #f0f0f0;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #c8ff00, #ff6b35);
+      border-radius: 2px;
+    }
+
+    .tp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .tp-card {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      color: #f0f0f0;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tp-card:hover {
+      transform: translateY(-8px);
+      border-color: #c8ff00;
+      box-shadow: 0 20px 40px -20px rgba(200, 255, 0, 0.5);
+    }
+
+    .tp-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #c8ff00, #ff6b35);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .tp-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .tp-number {
+      font-size: 0.85rem;
+      color: #c8ff00;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .tp-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .tp-desc {
+      color: #888;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .tp-status {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+
+    .status-done {
+      background: rgba(200, 255, 0, 0.15);
+      color: #c8ff00;
+      border: 1px solid rgba(200, 255, 0, 0.3);
+    }
+
+    .status-pending {
+      background: rgba(255, 107, 53, 0.15);
+      color: #ff6b35;
+      border: 1px solid rgba(255, 107, 53, 0.3);
+    }
+
+    .github-section {
+      margin: 3rem 0 2rem;
+      padding: 2rem;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+    }
+
+    .github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      color: #f0f0f0;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .github-link:hover {
+      border-color: #c8ff00;
+      color: #c8ff00;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -10px rgba(200, 255, 0, 0.3);
+    }
+
+    .github-icon {
+      font-size: 1.5rem;
+    }
+
+    .repos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .repo-tag {
+      background: #0d0d0d;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #2a2a2a;
+      color: #888;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .repo-tag:hover {
+      border-color: #c8ff00;
+      color: #c8ff00;
+    }
+
+    footer {
+      margin-top: 4rem;
+      color: #444;
+      font-size: 0.9rem;
+      border-top: 1px solid #2a2a2a;
+      padding-top: 2rem;
+    }
+
+    footer a {
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: #c8ff00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- En-tête -->
+    <h1>Abdelali TAHIRI</h1>
+    <p class="subtitle">
+      <a href="https://github.com/Abdelali155" target="_blank">@Abdelali155</a> · 1ère année Cybersécurité · ENSET Mohammedia
+    </p>
+
+    <!-- Informations de contact -->
+    <div class="info-card">
+      <div class="info-item">
+        <span class="info-icon">📧</span>
+        <span class="info-text"><strong>Email</strong> abdelaibendriss2005@gmail.com</span>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <span class="info-text"><strong>Localisation</strong> Mohammedia, Morocco</span>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">🔗</span>
+        <span class="info-text"><strong>LinkedIn</strong> /in/abdeli-tahiri-bb7004391</span>
+      </div>
+    </div>
+
+    <!-- Titre TP -->
+    <h2 class="section-title">Travaux Pratiques CSS</h2>
+
+<!-- Grille des TP -->
+<div class="tp-grid">
+  <!-- TP1 - Portfolio Personnel -->
+  <a href="tp1/index.html" class="tp-card">
+    <div class="tp-number">TP 1 · Portfolio</div>
+    <div class="tp-title">Page de présentation</div>
+    <div class="tp-desc">
+      CV personnel avec photo, compétences, formations et liens vers réseaux sociaux.
+      Structure sémantique HTML5 complète.
+    </div>
+    <div class="tp-status status-done">✅ Complété</div>
+  </a>
+
+  <!-- TP2 - Formulaire d'inscription -->
+  <a href="tp2/index.html" class="tp-card">
+    <div class="tp-number">TP 2 · Formulaire</div>
+    <div class="tp-title">Inscription utilisateur</div>
+    <div class="tp-desc">
+      Formulaire d'inscription complet avec validation, force de mot de passe, 
+      sélecteurs, et gestion des erreurs.
+    </div>
+    <div class="tp-status status-done">✅ Complété</div>
+  </a>
+
+  <!-- TP3 - Site vitrine multi-pages -->
+  <a href="tp3/index.html" class="tp-card">
+    <div class="tp-number">TP 3 · Site vitrine</div>
+    <div class="tp-title">TahiriSec - Cybersécurité</div>
+    <div class="tp-desc">
+      Site complet 5 pages : accueil, services, contact, galerie, à propos.
+      Vidéo, tableau de tarifs, iframe, images responsives.
+    </div>
+    <div class="tp-status status-done">✅ Complété</div>
+  </a>
+</div>
+
+    <!-- Section GitHub -->
+    <div class="github-section">
+      <h3 style="color: #fff; margin-bottom: 1rem;">📦 Projets GitHub</h3>
+      <div class="repos">
+        <span class="repo-tag">dijkstra-pathfinding</span>
+        <span class="repo-tag">programming-tds</span>
+        <span class="repo-tag">Python</span>
+        <span class="repo-tag">C</span>
+      </div>
+      
+      <a href="https://github.com/Abdelali155" target="_blank" class="github-link">
+        <span class="github-icon">🐙</span>
+        Voir mon profil GitHub
+        <span style="font-size: 0.8rem;">→</span>
+      </a>
+    </div>
+
+    <!-- Navigation rapide -->
+    <div style="margin: 2rem 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/tp1" style="color: #888; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid #2a2a2a; border-radius: 6px;">TP1</a>
+      <a href="/tp2" style="color: #888; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid #2a2a2a; border-radius: 6px;">TP2</a>
+      <a href="/tp3" style="color: #888; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid #2a2a2a; border-radius: 6px;">TP3</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2024 Abdelali TAHIRI · <a href="https://c3-li-tahiri.enset.ma">c3-li-tahiri.enset.ma</a></p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Développé dans le cadre du cours HTML/CSS · Tous les TP sont validés W3C</p>
+    </footer>
+  </div>
+</body>
+</html>
