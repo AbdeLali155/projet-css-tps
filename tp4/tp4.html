@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP CSS3 — ENSET Mohammedia</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d14;
+  --surface: #13131f;
+  --surface2: #1a1a2b;
+  --border: #2a2a40;
+  --accent: #6c63ff;
+  --accent2: #00e5b0;
+  --accent3: #ff6b8a;
+  --text: #e8e8f0;
+  --muted: #7a7a9a;
+  --code-bg: #0a0a12;
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(108,99,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,99,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(108,99,255,0.15);
+  color: #a89cff;
+  border: 1px solid rgba(108,99,255,0.3);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  position: relative; z-index: 1;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  position: relative; z-index: 1;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 500px;
+  position: relative; z-index: 1;
+  margin-bottom: 2.5rem;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative; z-index: 1;
+  margin-bottom: 3rem;
+}
+
+.hero-meta span {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-meta span::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent2);
+  display: inline-block;
+}
+
+.scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 15px;
+  position: relative; z-index: 1;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.scroll-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(108,99,255,0.4);
+}
+
+/* ── NAV ─────────────────────────────────────── */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(13,13,20,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  padding: 0 2rem;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.nav-logo {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: var(--surface2);
+}
+
+/* ── LAYOUT ─────────────────────────────────── */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+/* ── EXERCISE BLOCK ─────────────────────────── */
+.exercise {
+  margin-bottom: 5rem;
+  scroll-margin-top: 80px;
+}
+
+.ex-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ex-num {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent), #9c63ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  position: relative;
+}
+
+.ex-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+.ex-subtitle { color: var(--muted); font-size: 14px; }
+
+.duration {
+  margin-left: auto;
+  background: rgba(0,229,176,0.1);
+  color: var(--accent2);
+  border: 1px solid rgba(0,229,176,0.2);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* ── CARDS ─────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  margin-bottom: 1.2rem;
+}
+
+/* ── CODE BLOCK ─────────────────────────────── */
+.code-wrap {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.code-lang {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.copy-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Syne', sans-serif;
+}
+
+.copy-btn:hover { color: var(--text); border-color: var(--accent); }
+.copy-btn.copied { color: var(--accent2); border-color: var(--accent2); }
+
+pre {
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #c8c8e8;
+}
+
+/* Minimal syntax highlighting */
+.kw  { color: #c792ea; }
+.sel { color: #82aaff; }
+.prop{ color: #7fd6f7; }
+.val { color: #c3e88d; }
+.cmt { color: #546e7a; font-style: italic; }
+.str { color: #f78c6c; }
+.at  { color: #ffcb6b; }
+
+/* ── ANSWER BOX ─────────────────────────────── */
+.answer-box {
+  border-left: 3px solid var(--accent);
+  background: rgba(108,99,255,0.06);
+  border-radius: 0 10px 10px 0;
+  padding: 1.2rem 1.5rem;
+  margin: 1rem 0;
+}
+
+.answer-box p { color: var(--text); font-size: 15px; margin-bottom: 6px; }
+.answer-box p:last-child { margin-bottom: 0; }
+.answer-box strong { color: var(--accent2); font-weight: 600; }
+
+/* ── SPECIFICITY TABLE ──────────────────────── */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  margin: 1rem 0;
+}
+
+.spec-table th {
+  text-align: left;
+  padding: 10px 16px;
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+}
+
+.spec-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(42,42,64,0.5);
+  color: var(--text);
+}
+
+.spec-table tr:last-child td { border-bottom: none; }
+.spec-table tr:hover td { background: rgba(108,99,255,0.05); }
+
+.pill {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+}
+
+.pill-blue { background: rgba(108,99,255,0.15); color: #a89cff; }
+.pill-green { background: rgba(0,229,176,0.1); color: var(--accent2); }
+
+/* ── GRID DEMO ──────────────────────────────── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.section-divider h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── QUIZ ───────────────────────────────────── */
+#quiz {
+  scroll-margin-top: 80px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-top: 3rem;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.quiz-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent3), #ff9a6c);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+
+.quiz-title { font-size: 1.5rem; font-weight: 700; }
+.quiz-sub { color: var(--muted); font-size: 14px; }
+
+.q-block { margin-bottom: 2rem; }
+
+.q-text {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.q-num {
+  display: inline-block;
+  background: rgba(255,107,138,0.15);
+  color: var(--accent3);
+  border-radius: 6px;
+  padding: 1px 8px;
+  font-size: 12px;
+  margin-right: 8px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  user-select: none;
+}
+
+.option:hover { border-color: var(--accent); background: rgba(108,99,255,0.08); }
+
+.option input[type="radio"] { display: none; }
+
+.radio-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.option.selected .radio-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.option.selected .radio-dot::after {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.option.correct {
+  border-color: var(--accent2);
+  background: rgba(0,229,176,0.08);
+}
+
+.option.wrong {
+  border-color: var(--accent3);
+  background: rgba(255,107,138,0.08);
+}
+
+.quiz-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(108,99,255,0.35); }
+
+.btn-ghost {
+  background: none;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 12px 28px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+#score-display {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  display: none;
+}
+
+.score-num {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.score-msg { color: var(--muted); font-size: 15px; }
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+footer strong { color: var(--accent); }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 640px) {
+  .ex-header { flex-wrap: wrap; }
+  .duration { margin-left: 0; }
+  .nav-links { display: none; }
+  pre { font-size: 12px; }
+  #quiz { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Module : Technologies et Développement Web</div>
+  <h1>Travaux Pratiques<br><span>CSS3</span></h1>
+  <p>ENSET Mohammedia — Chapitre 4 · Solutions complètes des 8 exercices</p>
+  <div class="hero-meta">
+    <span>8 exercices + quiz</span>
+  </div>
+  <a href="#ex1" class="scroll-btn">Voir les solutions ↓</a>
+</section>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">TP <span>CSS3</span></a>
+    <ul class="nav-links">
+      <li><a href="#ex1">Sélecteurs</a></li>
+      <li><a href="#ex2">Box Model</a></li>
+      <li><a href="#ex3">Flexbox</a></li>
+      <li><a href="#ex4">Grid</a></li>
+      <li><a href="#ex5">Responsive</a></li>
+      <li><a href="#ex6">Variables</a></li>
+      <li><a href="#ex7">Animations</a></li>
+      <li><a href="#quiz">Quiz</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 1
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex1">
+  <div class="ex-header">
+    <div class="ex-num">1</div>
+    <div>
+      <div class="ex-title">Sélecteurs et Spécificité</div>
+      <div class="ex-subtitle">Cibler des éléments HTML avec précision</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>1.1 — Sélecteurs CSS</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="cmt">/* 1. Tous les liens dans la navigation */</span>
+<span class="sel">.main-nav a</span> { }
+
+<span class="cmt">/* 2. Uniquement le lien actif */</span>
+<span class="sel">.main-nav a.active</span> { }
+
+<span class="cmt">/* 3. L'article avec la classe "featured" */</span>
+<span class="sel">article.post.featured</span> { }
+
+<span class="cmt">/* 4. Le premier paragraphe de chaque article */</span>
+<span class="sel">article.post p:first-of-type</span> { }
+
+<span class="cmt">/* 5. Les éléments li pairs */</span>
+<span class="sel">li:nth-child(even)</span> { }</pre>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>1.2 — Spécificité</h4></div>
+
+  <div class="card">
+    <h3>Ordre croissant de spécificité</h3>
+    <table class="spec-table">
+      <thead><tr><th>Sélecteur</th><th>Score (a,b,c)</th><th>Niveau</th></tr></thead>
+      <tbody>
+        <tr><td><code>p</code></td><td>(0,0,1)</td><td><span class="pill pill-blue">Très faible</span></td></tr>
+        <tr><td><code>.text</code></td><td>(0,1,0)</td><td><span class="pill pill-blue">Faible</span></td></tr>
+        <tr><td><code>p.text</code></td><td>(0,1,1)</td><td><span class="pill pill-blue">Moyen-bas</span></td></tr>
+        <tr><td><code>#main .text p</code></td><td>(1,1,1)</td><td><span class="pill pill-green">Élevé</span></td></tr>
+        <tr><td><code>#main</code></td><td>(1,0,0)</td><td><span class="pill pill-green">Élevé</span></td></tr>
+      </tbody>
+    </table>
+    <div class="answer-box" style="margin-top:1rem">
+      <p><strong>Même spécificité →</strong> la règle déclarée en dernier dans le CSS gagne (principe de la cascade).</p>
+      <p><strong>Éviter !important →</strong> il brise la cascade naturelle, rend le débogage très difficile et crée des conflits en chaîne.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 2
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex2">
+  <div class="ex-header">
+    <div class="ex-num">2</div>
+    <div>
+      <div class="ex-title">Box Model</div>
+      <div class="ex-subtitle">Comprendre le calcul des dimensions</div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"><h4>2.1 — Calcul des largeurs</h4></div>
+
+  <div class="card">
+    <h3>Réponses</h3>
+    <div class="answer-box">
+      <p><strong>content-box (défaut) :</strong> 300 + 20×2 + 5×2 = <strong>350px</strong> de largeur totale visible</p>
+      <p><strong>border-box :</strong> La largeur totale reste <strong>300px</strong> — padding et border sont inclus dans le width</p>
+    </div>
+    <div class="code-wrap" style="margin-top:1rem">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="cmt">/* Reset universel box-sizing */</span>
+<span class="sel">*, *::before, *::after</span> {
+  <span class="prop">box-sizing</span>: <span class="val">border-box</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>2.2 — Centrage horizontal + vertical</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="cmt">/* Centrage horizontal seulement */</span>
+<span class="sel">.centered</span> {
+  <span class="prop">width</span>: <span class="val">600px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+}
+
+<span class="cmt">/* Centrage horizontal ET vertical avec Flexbox */</span>
+<span class="sel">body</span> {
+  <span class="prop">min-height</span>: <span class="val">100vh</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+}
+
+<span class="sel">.centered</span> {
+  <span class="prop">width</span>: <span class="val">600px</span>;
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 3
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex3">
+  <div class="ex-header">
+    <div class="ex-num">3</div>
+    <div>
+      <div class="ex-title">Flexbox</div>
+      <div class="ex-subtitle">Mise en page flexible et alignements</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>3.1 — Barre de navigation</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="sel">.navbar</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">padding</span>: <span class="val">0 24px</span>;
+  <span class="prop">height</span>: <span class="val">64px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid #eee</span>;
+}
+
+<span class="sel">.nav-links</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+  <span class="prop">list-style</span>: <span class="val">none</span>;
+  <span class="prop">margin</span>: <span class="val">0</span>;
+  <span class="prop">padding</span>: <span class="val">0</span>;
+}
+
+<span class="sel">.nav-links a</span> {
+  <span class="prop">text-decoration</span>: <span class="val">none</span>;
+  <span class="prop">color</span>: <span class="val">#333</span>;
+  <span class="prop">font-weight</span>: <span class="val">500</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>3.2 — Cartes de même hauteur</h4></div>
+
+  <div class="card">
+    <h3>Solution — footer toujours en bas</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="sel">.cards</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+  <span class="prop">align-items</span>: <span class="val">stretch</span>; <span class="cmt">/* hauteur égale pour toutes les cartes */</span>
+}
+
+<span class="sel">.card</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">flex</span>: <span class="val">1</span>;
+  <span class="prop">padding</span>: <span class="val">24px</span>;
+  <span class="prop">border</span>: <span class="val">1px solid #ddd</span>;
+  <span class="prop">border-radius</span>: <span class="val">8px</span>;
+}
+
+<span class="sel">.card p</span> {
+  <span class="prop">flex</span>: <span class="val">1</span>; <span class="cmt">/* pousse le bouton vers le bas */</span>
+}
+
+<span class="sel">.card-link</span> {
+  <span class="prop">margin-top</span>: <span class="val">auto</span>;
+  <span class="prop">display</span>: <span class="val">inline-block</span>;
+  <span class="prop">padding</span>: <span class="val">8px 16px</span>;
+  <span class="prop">background</span>: <span class="val">#0077ff</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">text-decoration</span>: <span class="val">none</span>;
+  <span class="prop">border-radius</span>: <span class="val">6px</span>;
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 4
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex4">
+  <div class="ex-header">
+    <div class="ex-num">4</div>
+    <div>
+      <div class="ex-title">CSS Grid</div>
+      <div class="ex-subtitle">Grilles et mise en page avancée</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>4.1 — Grille responsive automatique</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="sel">.grid-cards</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(auto-fit, minmax(200px, 1fr))</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+}
+
+<span class="sel">.card</span> {
+  <span class="prop">padding</span>: <span class="val">20px</span>;
+  <span class="prop">border</span>: <span class="val">1px solid #ddd</span>;
+  <span class="prop">border-radius</span>: <span class="val">8px</span>;
+}
+
+<span class="cmt">/* auto-fit + minmax → adapte le nombre de colonnes
+   automatiquement : 3 sur desktop, 2 sur tablette, 1 sur mobile */</span></pre>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>4.2 — Layout complet avec Grid Areas</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="sel">.page-layout</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-areas</span>:
+    <span class="str">"header  header"</span>
+    <span class="str">"sidebar main"</span>
+    <span class="str">"footer  footer"</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">250px 1fr</span>;
+  <span class="prop">grid-template-rows</span>: <span class="val">auto 1fr auto</span>;
+  <span class="prop">min-height</span>: <span class="val">100vh</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+}
+
+<span class="sel">.header</span>  { <span class="prop">grid-area</span>: <span class="val">header</span>;  }
+<span class="sel">.sidebar</span> { <span class="prop">grid-area</span>: <span class="val">sidebar</span>; }
+<span class="sel">.main</span>    { <span class="prop">grid-area</span>: <span class="val">main</span>;    }
+<span class="sel">.footer</span>  { <span class="prop">grid-area</span>: <span class="val">footer</span>;  }</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 5
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex5">
+  <div class="ex-header">
+    <div class="ex-num">5</div>
+    <div>
+      <div class="ex-title">Responsive Design</div>
+      <div class="ex-subtitle">Approche Mobile First avec media queries</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Solution — Mobile First</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="cmt">/* ── Base mobile (styles par défaut) ── */</span>
+<span class="sel">.container</span> { <span class="prop">width</span>: <span class="val">100%</span>; <span class="prop">padding</span>: <span class="val">15px</span>; }
+
+<span class="sel">.nav-menu</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">gap</span>: <span class="val">5px</span>;
+}
+
+<span class="sel">.content</span> { <span class="prop">display</span>: <span class="val">block</span>; }
+<span class="sel">.sidebar</span> { <span class="prop">display</span>: <span class="val">none</span>; }
+
+<span class="cmt">/* ── Tablette : ≥ 768px ── */</span>
+<span class="at">@media</span> (<span class="prop">min-width</span>: <span class="val">768px</span>) {
+  <span class="sel">.container</span> {
+    <span class="prop">max-width</span>: <span class="val">768px</span>;
+    <span class="prop">margin</span>: <span class="val">0 auto</span>;
+    <span class="prop">padding</span>: <span class="val">20px</span>;
+  }
+
+  <span class="sel">.nav-menu</span> {
+    <span class="prop">flex-direction</span>: <span class="val">row</span>;
+    <span class="prop">gap</span>: <span class="val">16px</span>;
+  }
+
+  <span class="sel">.content</span> {
+    <span class="prop">display</span>: <span class="val">grid</span>;
+    <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>;
+    <span class="prop">gap</span>: <span class="val">16px</span>;
+  }
+
+  <span class="sel">.sidebar</span> { <span class="prop">display</span>: <span class="val">block</span>; }
+}
+
+<span class="cmt">/* ── Desktop : ≥ 1024px ── */</span>
+<span class="at">@media</span> (<span class="prop">min-width</span>: <span class="val">1024px</span>) {
+  <span class="sel">.container</span> { <span class="prop">max-width</span>: <span class="val">1200px</span>; }
+
+  <span class="sel">.content</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">1fr 300px</span>;
+  }
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 6
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex6">
+  <div class="ex-header">
+    <div class="ex-num">6</div>
+    <div>
+      <div class="ex-title">Variables CSS et Thèmes</div>
+      <div class="ex-subtitle">Système de design avec custom properties</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Solution — Thème clair / sombre</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="cmt">/* ── Thème clair (défaut) ── */</span>
+<span class="sel">:root</span> {
+  <span class="prop">--color-primary</span>:    <span class="val">#0077ff</span>;
+  <span class="prop">--color-secondary</span>:  <span class="val">#6c757d</span>;
+  <span class="prop">--color-bg</span>:         <span class="val">#ffffff</span>;
+  <span class="prop">--color-surface</span>:    <span class="val">#f8f9fa</span>;
+  <span class="prop">--color-text</span>:       <span class="val">#212529</span>;
+  <span class="prop">--color-text-muted</span>: <span class="val">#6c757d</span>;
+  <span class="prop">--color-border</span>:     <span class="val">#dee2e6</span>;
+  <span class="prop">--color-success</span>:    <span class="val">#28a745</span>;
+  <span class="prop">--color-danger</span>:     <span class="val">#dc3545</span>;
+  <span class="prop">--border-radius</span>:    <span class="val">8px</span>;
+  <span class="prop">--shadow</span>:           <span class="val">0 2px 8px rgba(0,0,0,0.1)</span>;
+}
+
+<span class="cmt">/* ── Thème sombre ── */</span>
+<span class="sel">[data-theme="dark"]</span> {
+  <span class="prop">--color-primary</span>:    <span class="val">#4da6ff</span>;
+  <span class="prop">--color-bg</span>:         <span class="val">#1a1a2e</span>;
+  <span class="prop">--color-surface</span>:    <span class="val">#16213e</span>;
+  <span class="prop">--color-text</span>:       <span class="val">#e9ecef</span>;
+  <span class="prop">--color-text-muted</span>: <span class="val">#adb5bd</span>;
+  <span class="prop">--color-border</span>:     <span class="val">#495057</span>;
+  <span class="prop">--shadow</span>:           <span class="val">0 2px 8px rgba(0,0,0,0.4)</span>;
+}
+
+<span class="cmt">/* ── Utilisation ── */</span>
+<span class="sel">body</span> {
+  <span class="prop">background-color</span>: <span class="val">var(--color-bg)</span>;
+  <span class="prop">color</span>: <span class="val">var(--color-text)</span>;
+}
+
+<span class="sel">.card</span> {
+  <span class="prop">background</span>: <span class="val">var(--color-surface)</span>;
+  <span class="prop">border</span>: <span class="val">1px solid var(--color-border)</span>;
+  <span class="prop">border-radius</span>: <span class="val">var(--border-radius)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">var(--shadow)</span>;
+}
+
+<span class="cmt">/* Activation via JavaScript */</span>
+<span class="cmt">/* document.documentElement.setAttribute('data-theme', 'dark'); */</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     EXERCICE 7
+══════════════════════════════════════════ -->
+<section class="exercise" id="ex7">
+  <div class="ex-header">
+    <div class="ex-num">7</div>
+    <div>
+      <div class="ex-title">Transitions et Animations</div>
+      <div class="ex-subtitle">Bouton animé et spinner de chargement</div>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>7.1 — Bouton animé</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="sel">.btn</span> {
+  <span class="prop">padding</span>: <span class="val">12px 28px</span>;
+  <span class="prop">background</span>: <span class="val">#0077ff</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">none</span>;
+  <span class="prop">border-radius</span>: <span class="val">6px</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  <span class="prop">font-size</span>: <span class="val">16px</span>;
+  <span class="prop">transition</span>: <span class="val">background 0.3s ease,
+              transform  0.2s ease,
+              box-shadow 0.3s ease</span>;
+}
+
+<span class="sel">.btn:hover</span> {
+  <span class="prop">background</span>: <span class="val">#005fcc</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(-2px)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 6px 16px rgba(0, 119, 255, 0.35)</span>;
+}
+
+<span class="sel">.btn:active</span> {
+  <span class="prop">transform</span>: <span class="val">translateY(0)</span>;
+  <span class="prop">box-shadow</span>: <span class="val">none</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="section-divider"><h4>7.2 — Spinner de chargement</h4></div>
+
+  <div class="card">
+    <h3>Solution</h3>
+    <div class="code-wrap">
+      <div class="code-bar"><span class="code-lang">css</span><button class="copy-btn" onclick="copyCode(this)">Copier</button></div>
+<pre><span class="at">@keyframes</span> <span class="sel">spin</span> {
+  <span class="prop">from</span> { <span class="prop">transform</span>: <span class="val">rotate(0deg)</span>;   }
+  <span class="prop">to</span>   { <span class="prop">transform</span>: <span class="val">rotate(360deg)</span>; }
+}
+
+<span class="sel">.spinner</span> {
+  <span class="prop">width</span>: <span class="val">40px</span>;
+  <span class="prop">height</span>: <span class="val">40px</span>;
+  <span class="prop">border</span>: <span class="val">4px solid #e0e0e0</span>;
+  <span class="prop">border-top-color</span>: <span class="val">#0077ff</span>;
+  <span class="prop">border-radius</span>: <span class="val">50%</span>;
+  <span class="prop">animation</span>: <span class="val">spin 0.8s linear infinite</span>;
+}</pre>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer>
+  <p>TP CSS3 · <strong>ENSET Mohammedia</strong> · Module Technologies et Développement Web</p>
+</footer>
+
+<script>
+const ANSWERS = { q1: 1, q2: 1, q3: 2, q4: 1, q5: 1 };
+const selected = {};
+
+function pick(el, q) {
+  document.querySelectorAll(`#${q} .option`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selected[q] = Array.from(el.parentNode.children).indexOf(el);
+}
+
+function submitQuiz() {
+  let score = 0;
+  ['q1','q2','q3','q4','q5'].forEach(q => {
+    const opts = document.querySelectorAll(`#${q} .option`);
+    opts.forEach((o, i) => {
+      o.classList.remove('correct','wrong');
+      if (i === ANSWERS[q]) o.classList.add('correct');
+    });
+    if (selected[q] !== undefined) {
+      if (selected[q] === ANSWERS[q]) {
+        score++;
+      } else {
+        opts[selected[q]]?.classList.add('wrong');
+      }
+    }
+  });
+
+  const display = document.getElementById('score-display');
+  const pct = Math.round((score / 5) * 100);
+  const msg = score === 5 ? 'Parfait ! Bravo !' : score >= 3 ? 'Bien joué, continue !' : 'Revois les concepts clés.';
+  const color = score === 5 ? '#00e5b0' : score >= 3 ? '#6c63ff' : '#ff6b8a';
+
+  display.style.display = 'block';
+  display.style.background = `rgba(${score===5?'0,229,176':score>=3?'108,99,255':'255,107,138'},0.08)`;
+  display.style.border = `1px solid ${color}33`;
+  display.innerHTML = `
+    <div class="score-num" style="color:${color}">${score}/5</div>
+    <div class="score-msg">${pct}% de réussite — ${msg}</div>
+  `;
+  display.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetQuiz() {
+  ['q1','q2','q3','q4','q5'].forEach(q => {
+    delete selected[q];
+    document.querySelectorAll(`#${q} .option`).forEach(o => {
+      o.classList.remove('selected','correct','wrong');
+    });
+  });
+  const display = document.getElementById('score-display');
+  display.style.display = 'none';
+  display.innerHTML = '';
+}
+
+function copyCode(btn) {
+  const pre = btn.closest('.code-wrap').querySelector('pre');
+  navigator.clipboard.writeText(pre.innerText).then(() => {
+    btn.textContent = 'Copié !';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
