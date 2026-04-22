@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Client HTTP</title>
+</head>
+<body>
+    <h1>Client HTTP</h1>
+    
+    <label>Méthode:</label>
+    <select id="method">
+        <option>GET</option>
+        <option>POST</option>
+        <option>PUT</option>
+        <option>DELETE</option>
+    </select>
+    <br><br>
+    
+    <label>URL:</label>
+    <input type="text" id="url" size="50" value="https://jsonplaceholder.typicode.com/posts/1">
+    <br><br>
+    
+    <label>Headers:</label>
+    <div id="headersDiv">
+        <input type="text" placeholder="Nom" id="headerName1">
+        <input type="text" placeholder="Valeur" id="headerValue1">
+    </div>
+    <button onclick="ajouterHeader()">+ Header</button>
+    <br><br>
+    
+    <div id="bodyDiv">
+        <label>Body:</label><br>
+        <textarea id="body" rows="5" cols="50"></textarea>
+    </div>
+    <br>
+    
+    <button onclick="envoyer()">Envoyer</button>
+    
+    <hr>
+    
+    <h3>Réponse:</h3>
+    <div id="reponse"></div>
+    
+    <script>
+        let headerCount = 1;
+        
+        function ajouterHeader() {
+            headerCount++;
+            const div = document.getElementById('headersDiv');
+            div.innerHTML += `<br><input type="text" placeholder="Nom" id="headerName${headerCount}">
+                              <input type="text" placeholder="Valeur" id="headerValue${headerCount}">`;
+        }
+        
+        function getHeaders() {
+            const headers = {};
+            for(let i = 1; i <= headerCount; i++) {
+                const name = document.getElementById(`headerName${i}`).value;
+                const value = document.getElementById(`headerValue${i}`).value;
+                if(name && value) {
+                    headers[name] = value;
+                }
+            }
+            return headers;
+        }
+        
+        async function envoyer() {
+            const method = document.getElementById('method').value;
+            const url = document.getElementById('url').value;
+            const headers = getHeaders();
+            const body = document.getElementById('body').value;
+            
+            try {
+                const options = { method, headers };
+                if(body && method !== 'GET') {
+                    options.body = body;
+                }
+                
+                const reponse = await fetch(url, options);
+                
+                const status = `Statut: ${reponse.status} ${reponse.statusText}<br><br>`;
+                
+                let headersText = 'Headers:<br>';
+                for(let [key, value] of reponse.headers) {
+                    headersText += `${key}: ${value}<br>`;
+                }
+                headersText += '<br>';
+                
+                let corps;
+                const contentType = reponse.headers.get('content-type');
+                if(contentType && contentType.includes('application/json')) {
+                    const json = await reponse.json();
+                    corps = JSON.stringify(json, null, 2);
+                } else {
+                    corps = await reponse.text();
+                }
+                
+                document.getElementById('reponse').innerHTML = 
+                    status + headersText + '<br>Corps:<br><pre>' + corps + '</pre>';
+                    
+            } catch(erreur) {
+                document.getElementById('reponse').innerHTML = 
+                    '<span style="color:red">Erreur: ' + erreur.message + '</span>';
+            }
+        }
+    </script>
+</body>
+</html>
